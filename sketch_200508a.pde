@@ -1,13 +1,12 @@
 
 
-Circulo c1, c2, c3, tmp;
+Circulo tmp;
 ArrayList <Circulo> circulos = new <Circulo>ArrayList();
-float x, y;
-int idSelected = 0; // id del circulo
-int k = 10; // num de circulos
-int idTmp = 0;
- 
-color background;
+float x, y; // coordenadas en cada instanicia circulo
+int k = 14; // num de circulos
+int idTmp = 0; // identificar circulo a arrastrar
+color background; // color background de la ventana
+color bgCircle; // circle background color
 
 void setup(){
   size(600,400);
@@ -25,13 +24,35 @@ void setup(){
 
 
 void draw(){
+  idTmp = -1; // -1 == ningun circulo seleccionado
   background(background);
+  for (Circulo c: circulos){
+    c.dibuja();
+  }
 }
 
 
 void mouseDragged(){
-  if(c1.isAdentro(mouseX,mouseY)){
-    c1.x = mouseX;
-    c1.y = mouseY;
+  // identificar circulo a mover
+  for (Circulo c: circulos){ 
+    if(c.isAdentro(mouseX,mouseY)){ // si esta sobre el circulo
+      if(c.id >= idTmp){ // si el id es mayor al actual
+        idTmp = c.id; // sustituye circulo actual
+        println("idTmp = " + idTmp);
+      }
+    } 
+  }
+  // TODO: modificar coordenadas del circulo
+  if(idTmp != -1){ // mientras existe un circulo
+    println("Un circulo seleccionado");
+    for (Circulo c: circulos){
+      if(idTmp == c.id){ // circulo encontrado
+        c.x = mouseX;
+        c.y = mouseY;
+        println("Coordenadas modificadas");
+      }
+    }
+  }else{
+    println("Ningún circulo seleccionado");
   }
 }

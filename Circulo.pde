@@ -3,14 +3,12 @@ class Circulo {
   float x;
   float y;
   float radio;
-  boolean selected;
   
   Circulo(float a, float b, float c, int d) {
     id = d;
     x = a;
     y = b;
     radio = c;
-    selected = false;
     ellipseMode(CENTER);
   }
   
